@@ -33,16 +33,28 @@ const {adminAuth,userAuth}=require('./middlewares/auth')
 /////////////  HTTP METHODS (get,post,put, delete)
 
 
-app.use('/admin',adminAuth)
-app.get('/user',userAuth,(req,res)=>{
-    res.send("User data sent")
+app.get('/getUserData',(req,res)=>{
+    ///logic of db call and get user data
+      throw new Error('djnsm')
+      res.send("User data send")
 })
-app.get('/admin/getAllData',(req,res)=>{
-    res.send("All Data Sent")
+app.use('/',(err,req,res,next)=>{
+    if(err){
+        res.status(500).send("something wrong")
+    }
 })
-app.get('/admin/deleteUser',(req,res)=>{
-    res.send("Deleted a user")
-})
+
+// MIDDLEWRE
+// app.use('/admin',adminAuth)
+// app.get('/user',userAuth,(req,res)=>{
+//     res.send("User data sent")
+// })
+// app.get('/admin/getAllData',(req,res)=>{
+//     res.send("All Data Sent")
+// })
+// app.get('/admin/deleteUser',(req,res)=>{
+//     res.send("Deleted a user")
+// })
 
 // app.use('/user',(req,res,next)=>{
 //     console.log("handling route 1")
