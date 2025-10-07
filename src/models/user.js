@@ -19,7 +19,7 @@ const userSchema=new mongoose.Schema(  //defines user
         emailId:{
             type:String,
             required:true ,
-            unique:true,
+            unique:true,  // index
             lowercase:true,
             trim:true,
             validate(value){
@@ -39,11 +39,15 @@ const userSchema=new mongoose.Schema(  //defines user
         },
         gender:{
             type:String,
-            validate(value){
-                if(!["male","female","others"].includes(value)){
-                    throw new Error("Gender is data is not valid")
-                }
-            }
+            enum:{
+                values:["male","female","other"],
+                message:`{VALUE} is not a valid gender type`
+            },
+            // validate(value){
+            //     if(!["male","female","others"].includes(value)){
+            //         throw new Error("Gender is data is not valid")
+            //     }
+            // }
         },
         photoUrl:{
             type:String,
